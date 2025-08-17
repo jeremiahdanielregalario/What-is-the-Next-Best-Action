@@ -49,6 +49,8 @@ def predict_next_best_action(
     model=model,
     id_col: str = "CST_ID",
     action_col: str = "PRODUCT_TYPE",
+    feature_cols: str = None,
+    actions: str = None,
     shopper_type_col: str = "SHOPPER"
 ):
 
