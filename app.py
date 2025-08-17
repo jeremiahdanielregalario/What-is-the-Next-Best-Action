@@ -44,7 +44,7 @@ col1, col2 = st.columns([2,1])
 
 # Function to predict next best action for a given customer ID
 def predict_next_best_action(
-    customer_id: Any,
+    customer_id,
     df=df,
     model=model,
     id_col: str = "customer_id",
