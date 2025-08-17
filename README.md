@@ -40,18 +40,7 @@ The app provides a minimal web UI and a programmatic REST API so you can both de
 
 ## Recommended `requirements.txt`
 
-For the Flask app (minimal):
-
-```
-flask
-pandas
-numpy
-pyarrow
-scikit-learn
-joblib
-```
-
-For the Streamlit demo (optional):
+For the Streamlit demo:
 
 ```
 streamlit
