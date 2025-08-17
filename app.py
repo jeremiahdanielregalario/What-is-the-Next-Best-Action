@@ -48,7 +48,7 @@ def predict_next_best_action(
     df=df,
     model=model,
     id_col: str = "CST_ID",
-    action_col: str = "PRODUCT_TYPE",
+    action_col: str = "CST_ID",
     feature_cols: str = None,
     actions: str = None,
     shopper_type_col: str = "SHOPPER"
@@ -164,6 +164,8 @@ with col1:
     customer_id = st.selectbox("Customer ID", unique_id)
     best_action, shopper_type = predict_next_best_action(customer_id)
     print(f"The next best action for customer ID {customer_id} ({shopper_type} shopper) is to recommend the product type: {best_action}")
+
+
 with col2:
     
     st.subheader("Predict from dataset row")
