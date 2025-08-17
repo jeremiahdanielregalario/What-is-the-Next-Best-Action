@@ -43,7 +43,7 @@ else:
 col1, col2 = st.columns([2,1])
 
 # Function to predict next best action for a given customer ID
-def predict_next_best_action(customer_id, df=df, model=m):
+def predict_next_best_action(customer_id, df=df, model=model):
     shopper_type = df.loc[df['CST_ID'] == customer_id, 'SHOPPER'].iloc[0]
     df_shopper = df[df['SHOPPER'] == shopper_type]
 
@@ -68,7 +68,7 @@ with col1:
     st.subheader("Predict from Customer ID")
     unique_id = sorted(df['CST_ID'].unique())
     customer_id = st.selectbox("Customer ID", unique_id)
-    next_best_action = predict_next_best_action(customer_id, nba_df)
+    next_best_action = predict_next_best_action(customer_id)
     st.write(f"The next best action for customer ID {customer_id} ({shopper_type} shopper) is to recommend the product type: {next_best_action}")
 
 with col2:
