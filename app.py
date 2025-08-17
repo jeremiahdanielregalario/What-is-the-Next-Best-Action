@@ -62,13 +62,13 @@ def predict_next_best_action(customer_id, df=df, model=model):
 
     next_product_type = label_encoder_next_product_type.inverse_transform([next_product_type_encoded])[0]
 
-    return next_product_type
+    return next_product_type, shopper_type
 
 with col1:
     st.subheader("Predict from Customer ID")
     unique_id = sorted(df['CST_ID'].unique())
     customer_id = st.selectbox("Customer ID", unique_id)
-    next_best_action = predict_next_best_action(customer_id)
+    next_best_action, shopper_type = predict_next_best_action(customer_id, nba_df)
     st.write(f"The next best action for customer ID {customer_id} ({shopper_type} shopper) is to recommend the product type: {next_best_action}")
 
 with col2:
