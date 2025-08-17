@@ -62,7 +62,7 @@ def predict_next_best_action(customer_id, df=df, model=model):
 
     next_product_type = label_encoder_next_product_type.inverse_transform([next_product_type_encoded])[0]
 
-    return next_product_type, shopper_type
+    return next_product_type, shopper_type[0]
 
 with col1:
     st.subheader("Predict from Customer ID")
