@@ -47,7 +47,7 @@ def predict_next_best_action(customer_id, df=df, model=model):
     shopper_type = df.loc[df['CST_ID'] == customer_id, 'SHOPPER'].iloc[0]
     df_shopper = df[df['SHOPPER'] == shopper_type]
 
-    data = prepare_data(df_shopper)
+    data = pd.read_parquet("prep.parquet")
 
     if customer_id not in data['CST_ID'].values:
         return f"Customer ID {customer_id} not found for shopper type {shopper_type}"
