@@ -159,7 +159,7 @@ with col1:
     st.subheader("Predict from Customer ID")
     unique_id = sorted(df['CST_ID'].unique())
     customer_id = st.selectbox("Customer ID", unique_id)
-    best_action, shopper_type = predict_next_best_action(customer_id, nba_df, model)
+    best_action, shopper_type = predict_next_best_action(customer_id)
     print(f"The next best action for customer ID {customer_id} ({shopper_type} shopper) is to recommend the product type: {best_action}")
 with col2:
     
