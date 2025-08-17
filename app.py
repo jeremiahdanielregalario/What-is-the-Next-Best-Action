@@ -50,7 +50,7 @@ def predict_next_best_action(customer_id, df=df, model=model):
     data = pd.read_parquet("prep.parquet")
 
     if customer_id not in data['CST_ID'].values:
-        return f"Customer ID {customer_id} not found for shopper type {shopper_type}"
+        return f"Customer ID {customer_id} not found for shopper type {shopper_type}", None
 
     customer_data = data[data['CST_ID'] == customer_id].drop(columns=['CST_ID', 'NEXT_PRODUCT_TYPE'])
 
@@ -62,7 +62,7 @@ def predict_next_best_action(customer_id, df=df, model=model):
 
     next_product_type = label_encoder_next_product_type.inverse_transform([next_product_type_encoded])[0]
 
-    return next_product_type, shopper_type[0]
+    return next_product_type, shopper_type
 
 with col1:
     st.subheader("Predict from Customer ID")
