@@ -48,7 +48,8 @@ def predict_next_best_action(
     df=df,
     model=model,
     id_col: str = "CST_ID",
-    action_col: str = "PRODUCT_TYPe"
+    action_col: str = "PRODUCT_TYPE",
+    shopper_type_col: str = "SHOPPER"
 ):
 
     # 1. find customer row
