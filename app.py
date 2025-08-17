@@ -29,7 +29,7 @@ def load_model():
 df, df_path, df_error = load_df()
 model, model_path, model_error = load_model()
 
-st.title("NBA Predictor (Streamlit)")
+st.title("Next Best Action")
 st.markdown(f"**Data:** `{df_path or 'not found'}`  &nbsp;  |  &nbsp; **Model:** `{model_path or 'not found'}`")
 
 if df is None:
@@ -113,4 +113,3 @@ if model is None:
     st.warning("Model not loaded. Place model.pkl in the project root or /mnt/data.")
     if model_error:
         st.code(model_error)
-st.write("Streamlit is great for exploration/demos. If you need a full REST API to integrate with other services, use Flask or run a small Flask app alongside Streamlit.")
