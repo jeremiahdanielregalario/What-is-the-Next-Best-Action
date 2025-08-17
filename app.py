@@ -42,9 +42,39 @@ else:
 
 col1, col2 = st.columns([2,1])
 
+# Function to predict next best action for a given customer ID
+def predict_next_best_action(customer_id, df=df, model=m):
+    shopper_type = df.loc[df['CST_ID'] == customer_id, 'SHOPPER'].iloc[0]
+    df_shopper = df[df['SHOPPER'] == shopper_type]
+
+    data = prepare_data(df_shopper)
+
+    if customer_id not in data['CST_ID'].values:
+        return f"Customer ID {customer_id} not found for shopper type {shopper_type}"
+
+    customer_data = data[data['CST_ID'] == customer_id].drop(columns=['CST_ID', 'NEXT_PRODUCT_TYPE'])
+
+    customer_data['PRODUCT_TYPE'] = label_encoder_product_type.transform(customer_data['PRODUCT_TYPE'])
+    customer_data['PRODUCT_BRAND'] = label_encoder_product_brand.transform(customer_data['PRODUCT_BRAND'])
+    customer_data['LAST_PRODUCT_TYPE'] = label_encoder_last_product_type.transform(customer_data['LAST_PRODUCT_TYPE'])
+
+    next_product_type_encoded = model.predict(customer_data)[0]
+
+    next_product_type = label_encoder_next_product_type.inverse_transform([next_product_type_encoded])[0]
+
+    return next_product_type
+
 with col1:
+    st.subheader("Predict from Customer ID")
+    unique_id = sorted(df['CST_ID'].unique())
+    customer_id = st.selectbox("Customer ID", unique_id)
+    next_best_action = predict_next_best_action(customer_id, nba_df)
+    st.write(f"The next best action for customer ID {customer_id} ({shopper_type} shopper) is to recommend the product type: {next_best_action}")
+
+with col2:
+    
     st.subheader("Predict from dataset row")
-    # Create readable index options
+    
     try:
         idx_options = list(map(str, list(df.index[:500])))
     except Exception:
@@ -80,36 +110,7 @@ with col1:
             except Exception as e:
                 st.exception(e)
 
-with col2:
-    st.subheader("Predict from JSON")
-    json_text = st.text_area("Paste a JSON dict or list of dicts (features)", height=200, value="{}")
-    if st.button("Predict JSON"):
-        try:
-            payload = json.loads(json_text)
-            if isinstance(payload, dict):
-                X = pd.DataFrame([payload])
-            elif isinstance(payload, list):
-                X = pd.DataFrame(payload)
-            else:
-                st.error("Unsupported JSON format: must be dict or list of dicts")
-                X = None
-            if X is not None:
-                if hasattr(model, "feature_names_in_"):
-                    needed = list(model.feature_names_in_)
-                    for c in needed:
-                        if c not in X.columns:
-                            X[c] = np.nan
-                    X = X[needed]
-                pred = model.predict(X)
-                st.success(f"Predictions: {pred.tolist()}")
-                if hasattr(model, "predict_proba"):
-                    st.write("Probabilities:", model.predict_proba(X).tolist())
-        except Exception as e:
-            st.exception(e)
+
 
 st.markdown("---")
 st.subheader("Notes / Troubleshooting")
-if model is None:
-    st.warning("Model not loaded. Place model.pkl in the project root or /mnt/data.")
-    if model_error:
-        st.code(model_error)
