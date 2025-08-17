@@ -158,5 +158,6 @@ If you hit an error, the app prints tracebacks to help debugging and surfaces th
 ## Author
 
 - [Jeremiah Daniel A. Regalario](https://github.com/jeremiahdanielregalario/)
+- Zia Claros
 
 
