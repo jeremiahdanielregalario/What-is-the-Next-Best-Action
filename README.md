@@ -1,5 +1,5 @@
-# What-is-the-Next-Best-Action
-Next Best Action Ad Hoc project from BPI Data Science Internship Project
+# What is the Next Best Action?
+Next Best Action Ad Hoc project from BPI Data Science Internship 2024 Project
 
 Check out the online streamlit app [here](https://what-is-the-next-best-action.streamlit.app/)
 
