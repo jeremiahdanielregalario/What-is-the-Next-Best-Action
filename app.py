@@ -317,6 +317,5 @@ with col2:
 st.markdown("---")
 st.subheader("Notes / Troubleshooting")
 st.write("""
-- Long-term: save and load the *full preprocessing Pipeline* (e.g. scikit-learn Pipeline containing encoders/ColumnTransformer) with `joblib.dump(pipeline, "model.pkl")`.
-- Short-term: this app will attempt to coerce candidate rows to numeric codes using the training `nba.parquet`, but that mapping may differ from your exact encoder used at training time.
+         - Short-term: this app will attempt to coerce candidate rows to numeric codes using the training `nba.parquet`, but that mapping may differ from your exact encoder used at training time.
 """)
