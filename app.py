@@ -23,14 +23,7 @@ def load_df():
 @st.cache_data
 def load_model():
     p = "model.pkl"
-    try:
-        m = joblib.load(p)
-    except Exception:
-        try:
-            with open(p, "rb") as f:
-                m = pickle.load(f)
-        except Exception as e:
-            return None, p, str(e)
+    m = joblib.load(p)
     return m, p, None
 
 df, df_path, df_error = load_df()
