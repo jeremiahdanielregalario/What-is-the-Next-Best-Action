@@ -45,9 +45,11 @@ else:
     st.subheader("Data sample")
     st.dataframe(df.head(50), hide_index=True)
     st.markdown("""
+                <style>
             [data-testid="stElementToolbar"] {
                 display: none;
             }    
+            </style>
                 """, unsafe_allow_html=True)
     st.write(f"_*The full dataset used has ${df.shape[0]}$ rows._")
     
