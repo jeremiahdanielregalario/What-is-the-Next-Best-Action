@@ -275,44 +275,14 @@ with col2:
     except Exception:
         idx_options = [str(i) for i in range(min(500, len(df)))]
     selected_idx = st.selectbox("Select row index", idx_options)
+    row = df.iloc[int(selected_idx)]
+    customer_id = row["CST_ID"]
     if st.button("Predict selected row"):
-        row = None
         try:
-            idx0 = df.index[0]
-            if isinstance(idx0, str):
-                idx_val = selected_idx
-            else:
-                try:
-                    idx_val = type(idx0)(selected_idx)
-                except Exception:
-                    idx_val = int(selected_idx)
-            row = df.loc[idx_val]
-        except Exception:
-            try:
-                row = df.iloc[int(selected_idx)]
-            except Exception as e:
-                st.error(f"Could not find row: {e}")
-                row = None
-
-        if row is not None:
-            try:
-                if model is not None and hasattr(model, "feature_names_in_"):
-                    cols = list(model.feature_names_in_)
-                    vals = []
-                    for c in cols:
-                        vals.append(row[c] if c in row.index else np.nan)
-                    X = pd.DataFrame([vals], columns=cols)
-                else:
-                    X = pd.DataFrame([row.values], columns=list(row.index))
-                pred = model.predict(X)
-                try:
-                    st.success(f"Prediction: {pd.Series(pred).tolist()}")
-                except Exception:
-                    st.success(f"Prediction: {pred}")
-                if hasattr(model, "predict_proba"):
-                    st.write("Probabilities:", model.predict_proba(X).tolist())
-            except Exception as e:
-                st.exception(e)
+            best_action, shopper_type = predict_next_best_action(customer_id)
+            st.success(f"The next best action for customer ID {customer_id} ({shopper_type}) is to purchase: **{best_action}**")
+        except Exception as e:
+            st.exception(e)
 
 st.markdown("---")
 st.subheader("Notes / Troubleshooting")
