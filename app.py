@@ -44,21 +44,7 @@ if df is None:
 else:
     st.subheader("Data sample")
     st.dataframe(df.head(50))
-
-# # Show quick model diagnostics to help debugging
-# st.subheader("Model diagnostics (helpful for debugging)")
-# try:
-#     st.write("Model type:", type(model))
-#     st.write("Has predict_proba?:", hasattr(model, "predict_proba"))
-#     st.write("Has predict?:", hasattr(model, "predict"))
-#     st.write("Has classes_?:", hasattr(model, "classes_"))
-#     st.write("Pipeline named_steps (if pipeline):", getattr(model, "named_steps", None))
-#     try:
-#         st.write("feature_names_in_:", list(model.feature_names_in_))
-#     except Exception:
-#         st.write("feature_names_in_: (not present)")
-# except Exception:
-#     st.write("Could not fetch diagnostics for model.")
+    st.write(f"The dataset has {df.shape[0]} rows and {df.shape[1]} columns")
 
 col1, col2 = st.columns([1, 1])
 
