@@ -42,13 +42,13 @@ if df is None:
     if df_error:
         st.code(df_error)
 else:
+    st.subheader("Data sample")
+    st.dataframe(df.head(50), hide_index=True)
     st.markdown("""
             [data-testid="stElementToolbar"] {
                 display: none;
             }    
-                """)
-    st.subheader("Data sample")
-    st.dataframe(df.head(50), hide_index=True)
+                """, unsafe_allow_html=True)
     st.write(f"_*The full dataset used has ${df.shape[0]}$ rows._")
     
 
