@@ -42,9 +42,15 @@ if df is None:
     if df_error:
         st.code(df_error)
 else:
+    st.markdown("""
+            [data-testid="stElementToolbar"] {
+                display: none;
+            }    
+                """)
     st.subheader("Data sample")
     st.dataframe(df.head(50), hide_index=True)
     st.write(f"_*The full dataset used has ${df.shape[0]}$ rows._")
+    
 
 col1, col2 = st.columns([1, 1])
 
