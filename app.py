@@ -263,7 +263,7 @@ with col1:
             if st.button("Predict for selected customer"):
                 try:
                     best_action, shopper_type = predict_next_best_action(customer_id)
-                    st.success(f"The next best action for customer ID {customer_id} ({shopper_type}) is: **{best_action}**")
+                    st.success(f"The next best action for customer ID {customer_id} ({shopper_type}) is to purchase: **{best_action}**")
                 except Exception as e:
                     st.exception(e)
 
