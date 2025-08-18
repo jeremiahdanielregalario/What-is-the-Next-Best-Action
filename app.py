@@ -44,7 +44,7 @@ if df is None:
 else:
     st.subheader("Data sample")
     st.dataframe(df.head(50))
-    st.write(f"_*The full dataset used has ${df.shape[0]}$ rows and ${df.shape[1]}$ columns._")
+    st.write(f"_*The full dataset used has ${df.shape[0]}$ rows._")
 
 col1, col2 = st.columns([1, 1])
 
